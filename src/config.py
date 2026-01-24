@@ -16,5 +16,4 @@ REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 REDIS_PASSWORD = os.getenv("REDIS_PASSWORD", None)
 
-# Язык исходных текстов в main.ftl
 DEFAULT_LANGUAGE = os.getenv("DEFAULT_LANGUAGE", "en")
