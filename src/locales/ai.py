@@ -33,6 +33,9 @@ class AITranslator:
                 timeout=4
             )
             translated = responses.choices[0].message.content
+            if translated is None:
+                raise RuntimeError("ИИ вернул пустой ответ")
+            
         except:
             text, html, fmt = entities.freeze_html(text)
             translated_frozen = (await self.translator.translate(text, dest=target)).text

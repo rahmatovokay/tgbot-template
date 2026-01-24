@@ -16,7 +16,7 @@ class Banner(Text):
     async def _render_text(
         self, 
         data: dict, 
-        dialog_manager: DialogManager
+        manager: DialogManager
     ) -> str:
         
         return get_url(

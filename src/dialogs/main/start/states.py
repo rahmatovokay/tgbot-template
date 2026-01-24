@@ -1,4 +1,4 @@
 from aiogram.fsm.state import State, StatesGroup
 
-class StartSG(StatesGroup):
+class Start(StatesGroup):
     default = State()

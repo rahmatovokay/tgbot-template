@@ -1,3 +1,5 @@
+import inspect
+
 from aiogram_dialog.api.protocols import DialogManager
 from aiogram_dialog.widgets.common import WhenCondition
 from aiogram_dialog.widgets.text import Text
@@ -16,12 +18,12 @@ class Func(Text):
     async def _render_text(
         self,
         data: dict,
-        dialog_manager: DialogManager
+        manager: DialogManager
     ) -> str:
         if callable(self.func):
             result = self.func(**self.kwargs)
-            if hasattr(result, "__await__"):
+            if inspect.iscoroutine(result):
                 return await result
-            return result
+            return str(result)
         
         return str(self.func)

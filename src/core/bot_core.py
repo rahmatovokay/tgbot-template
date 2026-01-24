@@ -11,15 +11,20 @@ from src import config
 
 class BotManager:
     def __init__(self):
-        self.bot_token = config.BOT_TOKEN
-        self.api_url = config.BOT_API_URL
+        if config.BOT_TOKEN is None:
+            raise ValueError("BOT_TOKEN не задан")
+
+        if config.BOT_API_URL is None:
+            raise ValueError("BOT_API_URL не задан")
+
+        self.bot_token: str = config.BOT_TOKEN
+        self.api_url: str = config.BOT_API_URL
 
     def initialize(self):
-
         self.storage = MemoryStorage()
 
         self.dp = Dispatcher(
-            storage=self.storage, 
+            storage=self.storage,
             fsm_strategy=FSMStrategy.USER_IN_CHAT
         )
 
@@ -30,8 +35,8 @@ class BotManager:
             ),
             session=AiohttpSession(
                 api=TelegramAPIServer(
-                    base=self.api_url + "/bot{token}/{method}",
-                    file=self.api_url + "/file/bot{token}/{path}",
+                    base=f"{self.api_url}/bot{{token}}/{{method}}",
+                    file=f"{self.api_url}/file/bot{{token}}/{{path}}",
                 )
             )
         )
