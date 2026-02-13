@@ -16,11 +16,13 @@ class InitMiddleware(BaseMiddleware):
         data: Dict[str, Any]
     ) -> Any:
 
-        if isinstance(event, Message) and event.from_user:
-            language_code = event.from_user.language_code or "en"
+        user = getattr(event, "from_user", getattr(event, "user", None))
+        if user:
+            language_code = user.language_code or "en"
         else:
             language_code = "en"
 
         data["_"] = await translator.get_translator(language_code)
 
         return await handler(event, data)
+
