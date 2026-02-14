@@ -19,7 +19,7 @@ start = Dialog(
             type=types.ContentType.PHOTO,
         ),
         getter=get_data,
-        state=states.StartSG.default,
+        state=states.Start.default,
     ),
     launch_mode=LaunchMode.ROOT
 )
