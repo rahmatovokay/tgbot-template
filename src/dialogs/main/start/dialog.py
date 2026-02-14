@@ -15,7 +15,7 @@ start = Dialog(
     Window(
         _("start-msg"),
         StaticMedia(
-            url=Banner("night.png"),
+            url=Banner("night.jpg"),
             type=types.ContentType.PHOTO,
         ),
         getter=get_data,
