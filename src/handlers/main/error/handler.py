@@ -4,7 +4,7 @@ from aiogram_dialog.api.entities.modes import ShowMode
 from aiogram_dialog.api import exceptions
 
 from src import dp
-from src.dialogs.main.start.states import StartSG
+from src.dialogs.main.start.states import Start
 
 @dp.error()
 async def error_handler(
@@ -15,7 +15,7 @@ async def error_handler(
     if isinstance(exception, exceptions.UnknownIntent) and dialog_manager:
         await dialog_manager.done()
         dialog_manager.show_mode = ShowMode.EDIT
-        await dialog_manager.start(StartSG.default, mode=StartMode.RESET_STACK)
+        await dialog_manager.start(Start.default, mode=StartMode.RESET_STACK)
         return
     
     raise exception
